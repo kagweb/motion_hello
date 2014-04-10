@@ -1,14 +1,12 @@
 # coding: utf-8
 class WebViewController < UIViewController
-  attr_accessor :url
-
   def viewDidLoad
     super
 
     webview = UIWebView.new.tap do |wv|
       wv.scalesPageToFit = true
       wv.frame = self.view.bounds
-      wv.loadRequest(NSURLRequest.requestWithURL(NSURL.URLWithString(self.url)))
+      wv.loadRequest(NSURLRequest.requestWithURL(NSURL.URLWithString('http://dignik.com/')))
       wv.delegate = self
     end
     view.addSubview(webview)
@@ -29,6 +27,5 @@ class WebViewController < UIViewController
 
   def webViewDidFinishLoad(webview)
     @indicator.stopAnimating
-    navigationItem.title = webview.stringByEvaluatingJavaScriptFromString('document.title')
   end
 end
